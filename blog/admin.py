@@ -5,7 +5,7 @@ from .models import Article, Tag, Type
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'create_time', 'update_time', 'type', 'view_count']
+    list_display = ['title', 'create_time', 'update_time', 'type', 'isActive', 'view_count']
     list_display_links = ['title']
 
     

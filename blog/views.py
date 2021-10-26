@@ -12,7 +12,7 @@ from .utils import article_model_to_dict
 
 def articles(request):
     data = {
-            'stauts': 0,
+            'status': 0,
             'message': 'fail',
     } 
     try:
@@ -28,7 +28,7 @@ def articles(request):
 
 def article(request, id):
     data = {
-            'stauts': 0,
+            'status': 0,
             'message': 'fail',
     } 
     try:
@@ -61,3 +61,20 @@ def add_article(request):
         except Exception as e:
             print(e)
     return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii':False})
+
+def del_article(request, id):
+    data = {
+        'status': 0,
+        'message': 'fail',
+    }
+    try:
+        pk = request.POST.get('id')
+        req = Article.objects.get(pk=id)
+        if not req:
+            data['message'] = 'no match data'
+        req.isActive=False
+        req.save()
+    except Exception as e:
+        print(e)
+    return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii':False})
+        
